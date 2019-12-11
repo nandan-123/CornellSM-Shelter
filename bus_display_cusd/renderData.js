@@ -185,7 +185,7 @@ function render3(msg) {
 
 
 
-function updateLights{
+function updateLights(){
   var arrivaltime = sortedDepartures[0].arrival;
   var rpio = require('rpio');
   rpio.open(10, rpio.OUTPUT, rpio.HIGH);

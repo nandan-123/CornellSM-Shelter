@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> TCAT </title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="styles/all.css" media="all"/>
+  <script src="scripts/jquery-3.2.1.min.js" type="text/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZtZePBTLXPSvNiZL3wPoNmbAugSiJdWc&callback=initMap" type="text/javascript"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script language="javascript" type="text/javascript" src="scripts/maps.js"> </script>
+  <script language="javascript" type="text/javascript" src="scripts/getVehicles.js"> </script>
+  <script src="scripts/createTimetable.js" type="text/javascript"></script>
+  <script src="scripts/getTimetable.js" type="text/javascript"></script> 
+  <script src="scripts/getWeather.js" type="text/javascript"></script> 
+  <script src="scripts/setWeather.js" type="text/javascript"></script> 
+  <script src="scripts/getAlert.js" type="text/javascript"></script>
+</head>
+<style>
+html {
+	height:100%;
+	margin:0;
+	padding:0;
+}
+</style>
+
+<body style="height:100%">
+<div id="back_panel" style="height:100%"/>
+
+<!-- weather widget start -->
+
+
+<script>
+	var width = $(window).width();
+	var height = $(window).height();
+
+	// Top panel
+	function createTopBar () {
+		var topbar = document.createElement("div");
+		topbar.id = "top_bar";
+		// TCAT Logos
+		var buslogo = new Image();
+		buslogo.src = "images/TCAT_full_logo.png";
+		buslogo.alt = "TCAT";
+		buslogo.style = "width:10%;height:100%;display:inline-block"
+		topbar.appendChild(buslogo);
+		document.getElementById("back_panel").appendChild(topbar);
+	}
+
+	// Panel for the weather widet (invisible)
+	function createWeatherPanel() {
+		var weatherPanel = document.createElement("div");
+		weatherPanel.id = "weather_panel";
+		document.getElementById("back_panel").appendChild(weatherPanel);
+
+	}
+
+	// Large panel for timetable - 50% (left side) of screen
+	function createTimetablePanel() {
+		var timeTablePanel = document.createElement("div");
+		timeTablePanel.id = "timetable_panel"
+		document.getElementById("back_panel").appendChild(timeTablePanel);
+
+	}
+
+	//Create the top reference panel for the timetable, indicating "Route", "Dest", "EDT"
+	function createRefPanel() {
+		var refPanel = document.createElement("div");
+		refPanel.id = "ref_panel"
+
+		var route = document.createElement("div");
+		route.id = "ref_route";
+		route.innerHTML = "Route";
+
+		var dest = document.createElement("div");
+		dest.id = "ref_dest";
+		dest.innerHTML = "Destination";
+
+		var edt = document.createElement("div");
+		edt.id = "ref_edt";
+		edt.innerHTML = "Departing";
+
+		refPanel.appendChild(route);
+		refPanel.appendChild(dest);
+		refPanel.appendChild(edt);
+
+		document.getElementById("timetable_panel").appendChild(refPanel);
+
+	}
+
+	// Large back panel for map - 50% (right side side) of screen
+	function createMapPanel() {
+		var mapPanel = document.createElement("div");
+		mapPanel.id = "map_panel";
+		document.getElementById("back_panel").appendChild(mapPanel);
+	}
+
+	
+	//Scrolling  alerts is done thru CSS animation - see @keyframes scrollbar in all.css
+	function createScrollBar() {
+		if (!document.getElementById("scrollbar")){
+			scrollbar = document.createElement('div');
+		} else {
+			scrollbar = document.getElementById("scrollbar");
+		}
+		scrollbar.id = "scrollbar";
+		scrollbar.style.fontSize = ((.05 * height) * .75).toString() + "px";
+		var temp = document.createElement("p");
+		temp.id = "scroll_text"
+		scrollbar.appendChild(temp);
+		document.getElementById("back_panel").appendChild(scrollbar);
+		
+
+	}
+
+	//Need to update this logic - currently only showing the last alert
+	function fillScrollBar (alertMsg) {
+		console.log(alertMsg);
+		for (i = 0; i < alertMsg.length; i++) {	
+			document.getElementById("scroll_text").innerHTML = alertMsg[i].Message;
+		}
+	}
+
+	// Creates the invisible pane for the clock
+	function createClockPanel() {
+		var clockPanel = document.createElement("div");
+
+		clockPanel.id = "clock_panel";
+		// Could do fancy parsing/type casting to use the 5% from the top_bar.height, but 
+		// probably easier to just use a plain .05 here and change it if we change the topbar height
+		clockPanel.style.fontSize = ((.05 * height) * .75).toString() + "px";
+		document.getElementById("top_bar").appendChild(clockPanel);
+	}
+	// Runs the clock - updates ever 500ms
+	function runClock() {
+		var today = new Date();
+	    var h = today.getHours();
+	    var m = today.getMinutes();
+	    var s = today.getSeconds();
+	    m = checkTime(m);
+	    s = checkTime(s);
+	    document.getElementById("clock_panel").innerHTML =
+	    h + ":" + m + ":" + s;
+	    var t = setTimeout(runClock, 500);
+	}
+
+	function checkTime(i) {
+    	if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    	return i;
+	}
+
+
+	// Call all of the methods to actually construct the different panels. If you write a 
+	// new method in here, make sure to remember to actually call it! 
+
+	createTopBar();
+	createWeatherPanel();
+	createScrollBar();
+	createTimetablePanel();
+	createRefPanel();
+	createMapPanel();
+	createClockPanel();
+	runClock();
+
+
+	// Will need to work with UX team re: colors. Will probably want to just manually declare
+	// a dictionary based on the colors that TCAT uses for each route on the TCAT bus tracker
+	var bus_locs, timetable_info, weather;
+	var colors = [ "#8A2BE2", "#EE82EE", "#A52A2A", "#6495ED", "#00CED1", "#FF1493", " #1E90FF",
+    "#B22222", "#FFD700", "#CD5C5C", "#ADFF2F", "#4B0082", "#ADD8E6", "#20B2AA", "#9370DB",
+    "#FF4500", "#BC8F8F", "#FF6347", , "#F5DEB3", "#9ACD32", "#D8BFD8", "#008080",
+    "#00FF7F", "#6A5ACD", "#87CEEB", "#FF0000", "#E9967A", "#7FFFD4"];
+	var colormap = {};
+	var colorcount = 0;
+
+
+    update();
+
+    // Using jquery $.when and, .done() and $.then to deal with the asynchronous AJAX requests
+    // hitting TCAT's api. "a1" is the result of the request, and corresponds to the "msg" 
+    // variable. 
+    function update () {
+	  $.when(getWeather()).done(function (a1, a2, a3) {
+	  	weather = a1;
+	  	setWeather(a1);
+	  	console.log(weather);
+	  })
+      $.when(getTimetable()).done(function (a1, a2, a3) {
+	        timetable_info = a1;
+	        var schedule = Timetable(timetable_info);
+	        displayTimetable(schedule, colormap, colors, colorcount);
+	  })
+      .then(function () {
+      	$.when(getBuses2()).done(function (a1, a2, a3) {
+	        bus_locs = a1;
+	        DrawMap();
+	        MapRoute(bus_locs, colormap, colors, colorcount);
+      	})
+      })
+      $.when(getAlert()).done(function (a1, a2, a3) {
+      	// Alerts shouldn't be on same timeout as the map/timetable
+        alerts = a1;
+		console.log(alerts);
+		//displayAlerts(alert);
+		fillScrollBar(alerts);
+        console.log(colormap)
+	  })
+      .then(function() {
+        setTimeout(update, 60000); // call it again once a minute - can be faster
+      });
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+/* --------------------------------
+
+Primary style
+
+-------------------------------- */
+html * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding:0;
+}
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 100%;
+  font-family: "Ubuntu", sans-serif;
+  background-color: white;
+  padding:0;
+  margin:0;
+}
+
+body, html {
+  height: 100%;
+}
+
+a {
+  color: #3e3947;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.section1{
+  position: relative;
+  width:100vw;
+  height:14vh;
+  background-color: #7ac6e8;
+  overflow:hidden;
+}
+
+.section2{
+  position:relative;
+  width:100vw;
+  height:6vh;
+  background-color: #33a8db;
+  -webkit-box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+     -moz-box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+          box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+  z-index:10;
+}
+
+.section3{
+  position: relative;
+  width:100vw;
+  height:70vh;
+  z-index:8;
+  overflow-x:hidden;
+  overflow-y:scroll;
+}
+
+.section4{
+  position: relative;
+  z-index:10;
+  width:100vw;
+  height:10vh;
+  padding-left:20px;
+  padding-top:6px;
+  color:white;
+  background-color: #33a8db;
+  -webkit-box-shadow: 0 -8px 12px rgba(0,0,0,0.3);
+     -moz-box-shadow: 0 -8px 12px rgba(0,0,0,0.3);
+          box-shadow: 0 -8px 12px rgba(0,0,0,0.3);
+}
+
+/* Section 1*/
+#warning{
+  width: 80px;
+    float: left;
+}
+
+#warning img{
+  margin-top: 6px;
+    /* margin-left: 10px; */
+    margin-bottom: 10px;
+    height: 50px;
+    width: 50px;
+}
+
+#logo{
+  height:100%;
+  width:20vw;
+  float:left;
+  /*background-color: pink;*/
+}
+
+#logo img{
+  margin-top:13px;
+  margin-left:20px;
+  margin-bottom:10px;
+  width:50%;
+  float:left;
+}
+
+
+#title{
+  height:100%;
+  width:50vw;
+  float:left;
+  margin-left: 5vw;
+  /*background-color: purple;*/
+  text-align: center;
+  line-height: 100%;
+}
+
+#title h1{
+font-size: 3em;
+margin-block-start: 0.8em;
+margin-block-end: 0em;
+margin-inline-start: 0px;
+margin-inline-end: 0px;
+font-weight: bold;
+vertical-align: middle;
+color:white;
+}
+#title h3{
+  color:white;
+  display: block;
+font-size: 2.2em;
+margin-block-start: 0.2em;
+margin-block-end: 0.2em;
+margin-inline-start: 0px;
+margin-inline-end: 0px;
+font-weight: bold;
+color: white;
+padding-top: 35px;
+}
+#date{
+  height:100%;
+  width:20vw;
+  float:right;
+  /*background-color: pink;*/
+  text-align: right;
+  padding-right:20px;
+  padding-top:10px;
+}
+
+#date h3{
+  color:white;
+  display: block;
+font-size: 1.5em;
+margin-block-start: 0.2em;
+margin-block-end: 0.2em;
+margin-inline-start: 0px;
+margin-inline-end: 0px;
+font-weight: bold;
+}
+
+#alert{
+font-size: 1.9em;
+margin-inline-start: 0px;
+margin-inline-end: 0px;
+font-weight: bold;
+}
+
+#left_sec{
+  height:100%;
+  width:70vw;
+  float:left;
+  /*background-color: pink;*/
+}
+
+#right_sec{
+  height:100%;
+  width:30vw;
+  float:right;
+  background-color: #33a8db;
+}
+
+#service{
+  float:left;
+  width:13vw;
+  height:100%;
+  /*background-color: red;*/
+  color:white;
+}
+
+#service p{
+  font-weight: bold;
+  font-size:1.5em;
+  margin-left:13px;
+  margin-block-start: 0.4em;
+    margin-block-end: 0.5em;
+}
+
+#destination{
+  float:left;
+  width:40vw;
+  height:100%;
+  /*background-color: black;*/
+  color:white;
+}
+
+#destination p{
+  font-weight: bold;
+  font-size:1.5em;
+  margin-left:13px;
+  margin-block-start: 0.4em;
+    margin-block-end: 0.5em;
+}
+#time{
+  float:left;
+  width:17vw;
+  height:100%;
+  /*background-color: yellow;*/
+  color:white;
+}
+#time p {
+  font-weight: bold;
+  font-size:1.5em;
+  margin-left:13px;
+  margin-block-start: 0.4em;
+    margin-block-end: 0.5em;
+}
+
+#route{
+  float:left;
+  width:30vw;
+  height:100%;
+  /*background-color: red;*/
+  color:white;
+  text-align: center;
+}
+
+#route p {
+  font-weight: bold;
+  font-size:1.5em;
+  margin-left:13px;
+  margin-block-start: 0.4em;
+    margin-block-end: 0.5em;
+}
+
+#serv_info{
+  float:left;
+  width:13vw;
+  height:100%;
+  /*background-color: red;*/
+  color:#333333;
+}
+
+.serv_info_sub{
+  width:100%;
+  height:10vh;
+  margin-top:0;
+  left:0;
+  top:0;
+  border-bottom: 1px solid grey;
+  overflow: hidden;
+}
+
+.serv_info_sub p{
+  color: #333333;
+  margin-left:20px;
+  font-size:1.8em;
+  font-weight: bold;
+  margin-block-start: 0.7em;
+margin-block-end: 0em;
+}
+#dest_info{
+  float:left;
+  width:40vw;
+  height:100%;
+  /*background-color: black;*/
+}
+
+.dest_info_sub{
+  color: #333333;
+  width:100%;
+  height:10vh;
+  margin-top:0;
+  left:0;
+  top:0;
+  border-bottom: 1px solid grey;
+  overflow:hidden;
+}
+
+.dest_info_sub h5{
+  margin-left:20px;
+  font-size:1.8em;
+  font-weight: bold;
+  margin-block-start: 0.6em;
+margin-block-end: 0em;
+}
+
+.dest_info_sub p{
+  margin-left:20px;
+  font-size:0.6em;
+  margin-block-start: 0.1em;
+margin-block-end: 0em;
+}
+
+#time_info{
+  float:left;
+  width:17vw;
+  height:100%;
+  /*background-color: yellow;*/
+}
+
+.time_info_sub{
+  color: #333333;
+  width:100%;
+  height:10vh;
+  margin-top:0;
+  left:0;
+  top:0;
+  border-bottom: 1px solid grey;
+  overflow:hidden;
+}
+
+.time_info_sub p{
+  margin-left:20px;
+  font-size:1.8em;
+  font-weight: bold;
+  margin-block-start: 0.7em;
+margin-block-end: 0em;
+}
+
+#next_name{
+  width:100%;
+  height:10vh;
+  color:white;
+  text-align: center;
+}
+
+#next_name h2{
+  font-size:2.3em;
+}
+
+#line{
+  position:absolute;
+  left:75.6vw;
+  background-color:white;
+  width:0.5vh;
+  height:100%;
+  margin-top: 5vh;
+}
+
+#hori_line{
+  position:absolute;
+  left:70vw;
+  background-color:white;
+  width:5.6vw;
+  height:0.5vh;
+  margin-top: 5vh;
+}
+
+#line img{
+  width:0.3vw;
+}
+.stop_single{
+  height:7vh;
+}
+
+.circle {
+  width:3vh;
+  height:3vh;
+  position:relative;
+  float:left;
+  left:5vw;
+  background-color:white;
+  border-radius: 50%;
+  margin-bottom:2vh;
+}
+.circle img{
+  height:3vh;
+  width:3vh;
+}
+
+.stop_name{
+  height:5vh;
+  width:15vw;
+  position:relative;
+  float:left;
+  left:8vw;
+}
+
+.stop_name h3{
+  font-size: 1.17em;
+margin-block-start: 0.1em;
+margin-block-end: 0em;
+margin-inline-start: 0px;
+margin-inline-end: 0px;
+color:white;
+font-weight: normal;
+}
+
+#time{
+  float:left;
+  width:17vw;
+  height:100%;
+  /*background-color: yellow;*/
+  color:white;
+}
+#time p {
+  font-weight: bold;
+  font-size:1.5em;
+  margin-left:13px;
+  margin-block-start: 0.4em;
+    margin-block-end: 0.5em;
+}
